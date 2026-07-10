@@ -1,96 +1,189 @@
-# 🤖 FastAPI Ollama Chatbot
+# 🤖 AI Database Copilot
 
-An AI chatbot built using **FastAPI** and **Ollama** that runs Large Language Models (LLMs) locally without relying on cloud APIs.
+An AI-powered Database Copilot built using **FastAPI**, **Ollama**, **SQLAlchemy**, and **SQLite**. The application converts natural language questions into SQL queries, validates them for safety, executes them against a database, and returns the results.
 
 ---
 
 ## 🚀 Features
 
-- FastAPI REST API
-- Local LLM integration using Ollama
-- Supports Llama 3 and Qwen models
-- Request & Response validation using Pydantic
-- Modular project architecture
-- Structured logging
-- Swagger UI documentation
+- 🤖 AI-powered Natural Language to SQL generation
+- 🗄️ SQLite database integration using SQLAlchemy ORM
+- 🔍 Automatic database schema discovery
+- 🛡️ SQL query validation before execution
+- ⚡ FastAPI REST API
+- 📜 Chat history storage
+- 🐳 Dockerized application
+- 📖 Interactive Swagger API documentation
 
 ---
 
-## 🛠 Tech Stack
+## 🏗️ Tech Stack
 
-- Python
+- Python 3.13
 - FastAPI
-- Uvicorn
-- Ollama
-- Llama 3
-- Qwen2.5 Coder
-- HTTPX
+- SQLAlchemy
+- SQLite
+- Ollama (Llama 3)
 - Pydantic
+- HTTPX
+- Docker
 
 ---
 
 ## 📂 Project Structure
 
-```
-app
+```text
+AI-Database-Copilot/
 │
-├── core
-├── models
-├── services
-├── config.py
-└── main.py
+├── app/
+│   ├── core/
+│   ├── database/
+│   ├── models/
+│   ├── services/
+│   ├── config.py
+│   └── main.py
+│
+├── Dockerfile
+├── .dockerignore
+├── requirements.txt
+├── README.md
+└── LICENSE
 ```
 
 ---
 
-## Installation
+## ⚙️ Installation
+
+### Clone Repository
 
 ```bash
-git clone https://github.com/<your-username>/FastAPI-Ollama-Chatbot.git
+git clone https://github.com/<your-username>/AI-Database-Copilot.git
 
-cd FastAPI-Ollama-Chatbot
+cd AI-Database-Copilot
+```
 
+---
+
+### Create Virtual Environment
+
+```bash
 python -m venv venv
+```
 
+Activate
+
+Windows
+
+```bash
 venv\Scripts\activate
+```
 
+Linux / macOS
+
+```bash
+source venv/bin/activate
+```
+
+---
+
+### Install Dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
 ---
 
-## Run
+### Configure Environment
+
+Create a `.env` file
+
+```env
+OLLAMA_BASE_URL=http://localhost:11434
+MODEL_NAME=llama3:8b
+```
+
+---
+
+### Start Ollama
 
 ```bash
-python -m uvicorn app.main:app --reload
+ollama serve
+```
+
+Download model
+
+```bash
+ollama pull llama3:8b
 ```
 
 ---
 
-## API Documentation
+### Run Application
 
-Open
+```bash
+uvicorn app.main:app --reload
+```
+
+Swagger UI
 
 ```
-http://127.0.0.1:8000/docs
+http://localhost:8000/docs
 ```
 
 ---
 
-## Sample Request
+# 🐳 Docker
 
-```json
-{
-  "question": "Explain Retrieval-Augmented Generation"
-}
+Build Docker Image
+
+```bash
+docker build -t ai-database-copilot .
 ```
+
+Run Container
+
+```bash
+docker run -p 8000:8000 \
+-e OLLAMA_BASE_URL=http://host.docker.internal:11434 \
+ai-database-copilot
+```
+
+---
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| GET | / | Health Check |
+| POST | /ask | Ask AI |
+| GET | /tables | List database tables |
+| POST | /generate-sql | Generate SQL from natural language |
 
 ---
 
 ## Future Enhancements
 
-- Streaming responses
-- Conversation memory
-- React frontend
-- Docker deployment
-- Authentication
+- Multi-table support
+- PostgreSQL integration
+- Role-based authentication
+- Query execution history
+- Google Cloud deployment
+- CI/CD using GitHub Actions
+- Docker Compose
+- Kubernetes deployment
+- College ERP AI Assistant
+
+---
+
+## Author
+
+**Supriya P**
+
+Assistant Professor | AI & Software Engineering
+
+---
+
+## License
+
+MIT License
